@@ -1,5 +1,8 @@
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 // Ambil data buku berdasarkan id (prepared statement)
 $id = $_GET['id'] ?? 0;
 $stmt = $koneksi->prepare("SELECT * FROM buku WHERE id_buku = ?");

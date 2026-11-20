@@ -1,5 +1,8 @@
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 
 $judul_halaman = 'Data Anggota';
 $menu_aktif = 'anggota';
@@ -35,11 +38,15 @@ $no = 1;
                     <td><?= htmlspecialchars($row['no_hp'] ?? '') ?></td>
                     <td><?= htmlspecialchars($row['dibuat_pada'] ?? '') ?></td>
                     <td class="text-nowrap">
-                        <a href="edit_anggota.php?id=<?= (int)$row['id_anggota'] ?>"
-                           class="btn btn-warning btn-sm">Edit</a>
-                        <a href="hapus_anggota.php?id=<?= (int)$row['id_anggota'] ?>"
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin menghapus data anggota ini?')">Delete</a>
+                        <a href="edit_anggota.php?id=<?= (int) $row['id_anggota'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <?php if ($_SESSION['pengguna']['level'] === 'admin'): ?>
+
+                            <a href="hapus_anggota.php?id=<?= (int) $row['id_anggota'] ?>" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Yakin menghapus anggota ini?')">
+                                Hapus
+                            </a>
+
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endwhile; ?>

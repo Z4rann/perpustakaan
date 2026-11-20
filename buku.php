@@ -1,5 +1,8 @@
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 
 $judul_halaman = 'Data Buku';
 $menu_aktif = 'buku';
@@ -35,19 +38,23 @@ $no = 1;
                     <td><?= htmlspecialchars($row['judul'] ?? '') ?></td>
                     <td><?= htmlspecialchars($row['pengarang'] ?? '') ?></td>
                     <td><?= htmlspecialchars($row['penerbit'] ?? '') ?></td>
-                    <td><?= htmlspecialchars((string)($row['tahun_terbit'] ?? '')) ?></td>
-                    <td><?= htmlspecialchars((string)($row['stok'] ?? '')) ?></td>
+                    <td><?= htmlspecialchars((string) ($row['tahun_terbit'] ?? '')) ?></td>
+                    <td><?= htmlspecialchars((string) ($row['stok'] ?? '')) ?></td>
                     <td>
                         <?php if (!empty($row['sampul']) && file_exists(__DIR__ . '/sampul/' . $row['sampul'])): ?>
-                            <img class="sampul-buku"
-                                 src="sampul/<?= rawurlencode($row['sampul']) ?>"
-                                 alt="Sampul buku">
+                            <img class="sampul-buku" src="sampul/<?= rawurlencode($row['sampul']) ?>" alt="Sampul buku">
                         <?php endif; ?>
                     </td>
                     <td class="text-nowrap">
-                        <a href="edit.php?id=<?= (int)$row['id_buku'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                        <a href="hapus.php?id=<?= (int)$row['id_buku'] ?>" class="btn btn-danger btn-sm"
-                           onclick="return confirm('Yakin menghapus data ini?')">Hapus</a>
+                        <a href="edit.php?id=<?= (int) $row['id_buku'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <<?php if ($_SESSION['pengguna']['level'] === 'admin'): ?>
+
+                                <a href="hapus.php?id=<?= (int) $row['id_buku'] ?>" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Yakin menghapus data ini?')">
+                                    Hapus
+                                </a>
+
+                            <?php endif; ?>
                     </td>
                 </tr>
             <?php endwhile; ?>

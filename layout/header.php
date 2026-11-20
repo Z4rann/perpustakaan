@@ -40,28 +40,69 @@ padding-bottom: 64px;
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-info">
-        <div class="container">
-            <a class="navbar-brand" href="buku.php">Perpustakaan</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Buka navigasi">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link <?= $menu_aktif === 'buku' ? 'active' : '' ?>"
-                           href="buku.php">Buku</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?= $menu_aktif === 'anggota' ? 'active' : '' ?>"
-                           href="anggota.php">Anggota</a>
-                    </li>
-                </ul>
+    
+<nav class="navbar navbar-expand-lg bg-warning">
+    <div class="container">
+
+        <a class="navbar-brand" href="index.php">
+            Perpustakaan
+        </a>
+
+        <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Menu kiri -->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link <?= $menu_aktif === 'beranda' ? 'active' : '' ?>"
+                       href="index.php">
+                        Beranda
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link <?= $menu_aktif === 'buku' ? 'active' : '' ?>"
+                       href="buku.php">
+                        Buku
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link <?= $menu_aktif === 'anggota' ? 'active' : '' ?>"
+                       href="anggota.php">
+                        Anggota
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Menu kanan: identitas dan logout -->
+            <div class="ms-auto d-flex align-items-center">
+
+                <span class="navbar-text me-3">
+                    Halo,
+                    <b><?= htmlspecialchars($_SESSION['pengguna']['nama']) ?></b>
+                    (<?= htmlspecialchars($_SESSION['pengguna']['level']) ?>)
+                </span>
+
+                <a href="logout.php"
+                   class="btn btn-dark btn-sm"
+                   onclick="return confirm('Yakin ingin logout?')">
+                    Logout
+                </a>
+
             </div>
+
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="container my-4">
         <?php if (isset($_SESSION['pesan'])): ?>

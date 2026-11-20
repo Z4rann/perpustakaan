@@ -1,5 +1,8 @@
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 $judul_halaman = 'Input Anggota';
 $menu_aktif = 'anggota';
 require 'layout/header.php';

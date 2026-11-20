@@ -1,6 +1,9 @@
 
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 
 // TAMBAH ANGGOTA
 if (isset($_POST['submit_anggota'])) {

@@ -1,5 +1,8 @@
 <?php
 require 'koneksi.php';
+require 'auth.php'; // TAMBAHKAN INI
+
+require 'koneksi.php';
 
 $id = (int) ($_GET['id'] ?? 0);
 $stmt = $koneksi->prepare("SELECT * FROM anggota WHERE id_anggota = ?");
